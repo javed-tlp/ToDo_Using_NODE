@@ -7,25 +7,8 @@ exports.getItems = (req, res) => {
       res.status(500).send('Error fetching items');
       return;
     }
-    if (items.length === 0) {
-      // Add default items if the table is empty
-      const defaultItems = [
-        { name: "Welcome to your to-do list!" },
-        { name: "Hit the + button to add a new item." },
-        { name: "<-- Hit this to delete an item." }
-      ];
-      defaultItems.forEach(item => {
-        todoModel.addItem(item.name, (err) => {
-          if (err) {
-            console.error('Error adding default item:', err);
-          }
-        });
-      });
-      res.redirect('/');
-    } else {
-      // Render the view with the items
-      res.render('index', { listTitle: 'Today', newListItems: items });
-    }
+    // Render the view with the items
+    res.render('index', { listTitle: 'Today', newListItems: items });
   });
 };
 
